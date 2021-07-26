@@ -213,7 +213,7 @@ public class VentaDao {
             proveedor.addCell(cliNom);
             proveedor.addCell(cliTel);
             proveedor.addCell(cliDir);
-            String prove = "SELECT * FROM clientes WHERE nombre = ?";
+            String prove = "SELECT * FROM clientes WHERE id = ?";
             try {
                 ps = con.prepareStatement(prove);
                 ps.setInt(1, Cliente);
