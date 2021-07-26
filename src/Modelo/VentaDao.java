@@ -112,7 +112,7 @@ public class VentaDao {
     
     public List Listarventas(){
        List<Venta> ListaVenta = new ArrayList();
-       String sql = "SELECT * FROM ventas";
+       String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM clientes c INNER JOIN ventas v ON c.id = v.cliente";
        try {
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
@@ -120,7 +120,7 @@ public class VentaDao {
            while (rs.next()) {               
                Venta vent = new Venta();
                vent.setId(rs.getInt("id"));
-               vent.setCliente(rs.getInt("cliente"));
+               vent.setNombre_cli(rs.getString("nombre"));
                vent.setVendedor(rs.getString("vendedor"));
                vent.setTotal(rs.getDouble("total"));
                ListaVenta.add(vent);
