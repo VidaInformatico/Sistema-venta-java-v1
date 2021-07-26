@@ -155,7 +155,7 @@ public final class Sistema extends javax.swing.JFrame {
         Object[] ob = new Object[4];
         for (int i = 0; i < ListarVenta.size(); i++) {
             ob[0] = ListarVenta.get(i).getId();
-            ob[1] = ListarVenta.get(i).getCliente();
+            ob[1] = ListarVenta.get(i).getNombre_cli();
             ob[2] = ListarVenta.get(i).getVendedor();
             ob[3] = ListarVenta.get(i).getTotal();
             modelo.addRow(ob);
