@@ -1391,9 +1391,11 @@ public final class Sistema extends javax.swing.JFrame {
             lg.setRol(rol);
             login.Registrar(lg);
             JOptionPane.showMessageDialog(null, "Usuario Registrado");
+            LimpiarTable();
+            ListarUsuarios();
+            nuevoUsuario();
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
-
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
@@ -2098,7 +2100,11 @@ public final class Sistema extends javax.swing.JFrame {
         txtNombreClienteventa.setText("");
         txtIdCV.setText("");
     }
-
+    private void nuevoUsuario(){
+        txtNombre.setText("");
+        txtCorreo.setText("");
+        txtPass.setText("");
+    }
     private void llenarProveedor(){
         List<Proveedor> lista = PrDao.ListarProveedor();
         for (int i = 0; i < lista.size(); i++) {
