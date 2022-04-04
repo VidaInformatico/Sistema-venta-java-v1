@@ -10,8 +10,7 @@ public class Conexion {
 
     public Connection getConnection() {
         try {
-            //String access = "jdbc:ucanaccess://D:/ventas.accdb";
-            String myBD = "jdbc:mysql://localhost:3306/venta";
+            String myBD = "jdbc:mysql://localhost:3306/venta?serverTimezone=UTC";
             con = DriverManager.getConnection(myBD, "root", "");
             return con;
         } catch (SQLException e) {
