@@ -131,7 +131,7 @@ public class metodos {
             String codigo = txtCodProd.getText(), nombre = txtNombreProd.getText(), proveedor = comboProveedor.getSelectedItem().toString();
             String categoria = comboCategoria.getSelectedItem().toString();
             int cantidad = Integer.parseInt(txtCantProd.getText());//Convierte el texto en int
-            String fechaString = new SimpleDateFormat("yyyy/MM/dd").format(vencimiento.getDate());//Convierte la fecha a string y al formato necesario
+            String fechaString = new SimpleDateFormat("yyyy-MM-dd").format(vencimiento.getDate());//Convierte la fecha a string y al formato necesario
             Date fechaDate = Date.valueOf(fechaString);//Convierte el string a Date para poder insertarlo en la base de datos
             double precioC = Double.parseDouble(txtPrecioCompra.getText()), precioV = Double.parseDouble(txtPrecioVentaProd.getText());
             if (caso) {//Si CASO es true, significa que debe registrar
@@ -199,7 +199,6 @@ public class metodos {
         ResultSet rs = proveedor.ListarProveedor();
         while (rs.next()) {
             combo.addItem(rs.getString("nombre"));
-            System.out.println(rs.getString("nombre"));
         }
         rs.close();
         ResultSet rs1 = proveedor.listarCategoria();
@@ -208,4 +207,14 @@ public class metodos {
         }
         rs1.close();
     }
+
+    public void clickTablaProd(JTable tabla, JDateChooser vencimiento, JTextField txtCodProd, JTextField txtNombreProd, JTextField txtCantProd, JTextField txtPrecioCompra, JTextField txtPrecioVenta, JComboBox<String> comboProveedor, JComboBox<String> comboCategoria) {
+    int fila = tabla.getSelectedRow();
+        txtCodProd.setText(tabla.getValueAt(fila, 0).toString());
+        txtNombreProd.setText(tabla.getValueAt(fila, 1).toString());
+        txtCantProd.setText(tabla.getValueAt(fila, 7).toString());
+        txtPrecioCompra.setText(tabla.getValueAt(fila, 5).toString());
+        txtPrecioVenta.setText(tabla.getValueAt(fila, 6).toString());
+        comboProveedor.setSelectedItem(tabla.getValueAt(fila, 2));
+                }
 }

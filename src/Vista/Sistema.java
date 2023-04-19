@@ -57,7 +57,7 @@ public final class Sistema extends javax.swing.JFrame {
         TablaProveedores.setName("Proveedores");
         TablaProductos.setName("Productos");
         //Importa los datos de la BDD para llenar todas las tablas al iniciar el sistema
-        method.llenarCombos(comboProveedor,comboCategoria);
+        method.llenarCombos(comboProveedor, comboCategoria);
     }
 
     /*   public void ListarProveedor() {
@@ -1365,27 +1365,16 @@ public final class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarProActionPerformed
 
     private void btnEditarproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarproActionPerformed
-        // TODO add your handling code here:
-        if (!"".equals(txtCodProd.getText()) || !"".equals(txtNombreProd.getText()) || !"".equals(txtCantProd.getText()) || !"".equals(txtPrecioCompra.getText())) {
-            pro.setCodigo(txtCodProd.getText());
-            pro.setNombre(txtNombreProd.getText());
-            Combo itemP = (Combo) comboProveedor.getSelectedItem();
-            pro.setProveedor(itemP.getId());
-            pro.setStock(Integer.parseInt(txtCantProd.getText()));
-            pro.setPrecio(Double.parseDouble(txtPrecioCompra.getText()));
-            JOptionPane.showMessageDialog(null, "Producto Modificado");
-            LimpiarProductos();
-            comboProveedor.removeAllItems();
-//                llenarProveedor();
-            btnEditarpro.setEnabled(false);
-            btnEliminarPro.setEnabled(false);
-            btnGuardarpro.setEnabled(true);
+        try {
+            method.addUpdProd(TablaProductos, vencimiento, txtCodProd, txtNombreProd, txtCantProd, txtPrecioCompra, txtPrecioVentaProd, comboProveedor, comboCategoria, false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Sistema.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEditarproActionPerformed
 
     private void btnGuardarproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarproActionPerformed
         try {
-            method.addUpdProd(TablaProductos, vencimiento, txtCodProd, txtNombreProd, txtCantProd, txtPrecioCompra, txtPrecioVentaProd, comboProveedor, comboCategoria,true);
+            method.addUpdProd(TablaProductos, vencimiento, txtCodProd, txtNombreProd, txtCantProd, txtPrecioCompra, txtPrecioVentaProd, comboProveedor, comboCategoria, true);
         } catch (SQLException ex) {
             Logger.getLogger(Sistema.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1406,18 +1395,7 @@ public final class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioCompraKeyTyped
 
     private void TablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductosMouseClicked
-        // TODO add your handling code here:
-        btnEditarpro.setEnabled(true);
-        btnEliminarPro.setEnabled(true);
-        btnGuardarpro.setEnabled(true);
-        int fila = TablaProductos.rowAtPoint(evt.getPoint());
-//        txtIdproducto.setText(TablaProductos.getValueAt(fila, 0).toString());
- //       pro = proDao.BuscarId(Integer.parseInt(txtIdproducto.getText()));
-        txtCodProd.setText(pro.getCodigo());
-        txtNombreProd.setText(pro.getNombre());
-        txtCantProd.setText("" + pro.getStock());
-        txtPrecioCompra.setText("" + pro.getPrecio());
-        comboProveedor.setSelectedItem(new Combo(pro.getProveedor(), pro.getProveedorPro()));
+        method.clickTablaProd(TablaProductos, vencimiento, txtCodProd, txtNombreProd, txtCantProd, txtPrecioCompra, txtPrecioVentaProd, comboProveedor, comboCategoria);
     }//GEN-LAST:event_TablaProductosMouseClicked
 //Elimina un proveedor
     private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
